@@ -1,0 +1,9 @@
+@import "tailwindcss";
+body {
+  @apply font-sans;
+}
+@theme {
+  --color-brand: #3437D6E5;
+
+  --font-sans: "Google Sans Flex", system-ui, sans-serif;
+}
