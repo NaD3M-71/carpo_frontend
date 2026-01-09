@@ -1,5 +1,6 @@
 import type { Torneo } from '../types/Torneo'
 import { useAuth } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 interface Props {
   torneo: Torneo
@@ -19,8 +20,8 @@ const TorneoCard = ({ torneo }: Props) => {
         <p className="text-sm opacity-70">{torneo.lugar}</p>
       </div>
 
-      <button
-        className={`mt-4 rounded-lg px-4 py-2 text-sm font-semibold transition
+      <Link to={user ? `/torneos/${torneo.id}` : '/login'}
+        className={`mt-4 rounded-lg px-4 py-2 text-sm font-semibold transition text-center
           ${
             user
               ? 'bg-red-600 hover:bg-red-700'
@@ -28,7 +29,7 @@ const TorneoCard = ({ torneo }: Props) => {
           }`}
       >
         {user ? 'Inscribirme' : 'Ingresá para inscribirte'}
-      </button>
+      </Link>
     </div>
   )
 }

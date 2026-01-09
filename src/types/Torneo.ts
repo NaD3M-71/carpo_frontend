@@ -1,3 +1,5 @@
+export type EstadoTorneo = 'ABIERTO' | 'CERRADO'
+
 export interface Torneo {
   id: number
   nombre: string
@@ -9,11 +11,12 @@ export interface Torneo {
   lugar: string
   esCopaCARPO: boolean
   anio: number
-  estado: string
+  estado: EstadoTorneo
   activo: boolean
 }
 
 export interface TorneosResponse {
   total: number
   torneos: Torneo[]
+  torneo: Torneo
 }
