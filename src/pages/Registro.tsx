@@ -25,7 +25,7 @@ const Registro = () => {
     lateralidad: '',
     categoriaGeneral: '',
     sexo: '',
-    edadCategoria: '',
+    edadCategoria: 'SENIOR',
     bio: ''
   })
 
