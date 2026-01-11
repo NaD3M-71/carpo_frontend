@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { TipoArco } from '../../types/TipoArco'
 import type { RankingResponse } from '../../types/Rankings'
-import { Link } from 'react-router-dom'
+
 
 interface Props {
   tipoArco: TipoArco

@@ -1,5 +1,6 @@
 export interface CategoriaEspecifica {
   id: number
+  nombre: string
   modalidad: string
   categoriaGeneral: string
 }

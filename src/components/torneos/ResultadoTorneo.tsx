@@ -4,12 +4,14 @@ import { getInscriptos } from '../../api/torneos'
 import { guardarResultados } from '../../api/resultados'
 import type { Participacion } from '../../types/Participaciones'
 
+type Medalla = 'ORO' | 'PLATA' | 'BRONCE'
+
 type ResultadoForm = {
   puntajeClasificacion?: number
   posicionClasificacion?: number
   posicionFinal?: number
   esMejorClasificacion?: boolean
-  medalla?: 'ORO' | 'PLATA' | 'BRONCE'
+  medalla?: Medalla
   puntosExtra?: number
 }
 
@@ -36,7 +38,9 @@ useEffect(() => {
         posicionClasificacion: p.posicionClasificacion ?? undefined,
         posicionFinal: p.posicionFinal ?? undefined,
         esMejorClasificacion: p.esMejorClasificacion ?? false,
-        medalla: p.medalla ?? null,
+        medalla: p.medalla
+        ? (p.medalla as Medalla)
+        : undefined,
         puntosExtra: p.puntosExtra ?? undefined
       }
     })
