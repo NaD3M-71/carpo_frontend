@@ -47,7 +47,7 @@ const InscriptosPorCategoria = ({ inscriptos }: Props) => {
     <div className="space-y-12">
       <h3 className="text-white text-xl">TOTAL INSCRIPTOS : {inscriptos.length}</h3>
       {Object.entries(agrupados).map(([tipoArco, divisiones]) => (
-        <section key={tipoArco} className="space-y-6">
+        <section key={tipoArco} className="space-y-6 border-4 border-white p-4 rounded-lg">
           <h2 className="text-2xl font-bold text-white">
             {tipoArco}
           </h2>

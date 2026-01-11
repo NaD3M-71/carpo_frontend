@@ -8,6 +8,11 @@ import InscripcionTorneo from './pages/InscripcionTorneo'
 import InscribirArqueros from './pages/InscribirArqueros'
 import { useAuth } from './context/AuthContext'
 import type { JSX } from 'react'
+import ResultadosTorneo from './components/torneos/resultadoTorneo'
+import Registro from './pages/Registro'
+import Arqueros from './pages/Arqueros'
+import Galeria from './pages/Galeria'
+import PerfilArquero from './pages/Perfil'
 
 function App() {
   const AdminRoute = ({ children }: { children: JSX.Element }) => {
@@ -26,6 +31,10 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/arqueros" element={<Arqueros />} />
+        <Route path="/galeria" element={<Galeria />} />
+        <Route path="/perfil" element={<PerfilArquero />} />
 
         <Route path="/torneos" element={<TorneosIndex />} />
         <Route path="/torneos/:id" element={<TorneosDetalle />} />
@@ -34,12 +43,20 @@ function App() {
         <Route
           path="/torneos/:id/admin/inscribir"
           element={
-            // <AdminRoute>
+            <AdminRoute>
               <InscribirArqueros />
-            //</AdminRoute>
+            </AdminRoute>
           }
         />
-      </Route>
+        <Route
+          path="/torneos/:id/admin/resultados"
+          element={
+            <AdminRoute>
+              <ResultadosTorneo />
+            </AdminRoute>
+          }
+        />
+        </Route>
     </Routes>
   )
 }

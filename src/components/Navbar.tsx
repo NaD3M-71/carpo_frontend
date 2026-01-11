@@ -49,9 +49,10 @@ const Navbar = () => {
               <>
                 <Link
                   to="/perfil"
-                  className="rounded-md px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition"
+                  className="rounded-md px-4 py-2 text-sm font-semibold text-white hover:bg-white/10 transition text-center"
                 >
-                  Mi perfil
+                  ¡Hola {user.nombre}!
+                  <br></br>Mi perfil
                 </Link>
 
                 <button

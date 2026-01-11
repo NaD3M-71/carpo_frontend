@@ -100,13 +100,22 @@ const TorneoDetalle = () => {
         )}
 
         {/* ACCIONES ADMIN */}
-        {esAdmin && torneoAbierto && (
-          <Link
-            to={`/torneos/${torneo.id}/admin/inscribir`}
-            className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold"
-          >
-            Inscribir arqueros
-          </Link>
+        {esAdmin && (
+          <div>
+            <Link
+              to={`/torneos/${torneo.id}/admin/inscribir`}
+              className="inline-block px-6 py-2 mx-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold"
+            >
+              Inscribir arqueros
+            </Link>
+            <Link
+              to={`/torneos/${torneo.id}/admin/resultados`}
+              className="inline-block px-6 py-2 mx-2 bg-yellow-400 hover:bg-yellow-700 rounded-lg font-semibold"
+            >
+              Cargar resultados
+            </Link>
+
+          </div>
         )}
 
         {/* TORNEO CERRADO */}

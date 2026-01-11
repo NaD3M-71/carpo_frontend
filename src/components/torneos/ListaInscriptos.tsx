@@ -9,7 +9,7 @@ const ListaInscriptos = ({ titulo, inscriptos }: Props) => {
   return (
     <div className="overflow-x-auto">
       <h4 className="mb-2 text-sm font-semibold text-white">
-        {titulo}
+        {titulo === 'UNISEX' ? '' : titulo}
       </h4>
 
       <table className="w-full border border-gray-200 bg-white text-sm">

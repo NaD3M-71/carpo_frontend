@@ -1,5 +1,6 @@
 import type { CategoriasResponse } from '../types/CategoriaEspecifica'
 import type { Arquero, Participacion, ParticipacionesResponse } from '../types/Participaciones'
+import type { Arqueros } from '../types/Arquero'
 import type { Torneo, TorneosResponse } from '../types/Torneo'
 import api from './axios'
 
@@ -88,4 +89,13 @@ export const getArqueros = async ()=>{
   const data: Arquero = await res.json()
   return data.arqueros
 
+}
+
+export const getArqueroById = async (id: number): Promise<Arqueros> => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/arqueros/${id}`)
+  if (!res.ok) {
+    throw new Error('Error al obtener arquero')
+  }
+  const data: Arqueros = await res.json()
+  return data.arquero
 }
