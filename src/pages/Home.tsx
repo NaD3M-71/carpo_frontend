@@ -47,10 +47,6 @@ const Home = () => {
             ¿QUERÉS SER PARTE?
           </h1>
 
-          <h4 className="mt-2 text-xl font-bold text-white">
-            Círculo de Arquería de la Región Patagonia Oeste
-          </h4>
-
           <p className="mt-4 text-white/90">
             Para asociarte necesitás el Certificado de Iniciación en Arquería de FATARCO. El club dicta cursos durante el año y cuenta con lista de espera. Completá el formulario y sumate a la lista para dar tus primeros pasos en la arquería.
           </p>
