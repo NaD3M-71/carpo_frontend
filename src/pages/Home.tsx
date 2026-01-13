@@ -1,6 +1,7 @@
 
 import RankingSlider from "../components/ranking/RankingSlider"
 import TorneosPreview from "../components/TorneoPreview"
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
