@@ -17,7 +17,7 @@ const Home = () => {
           </h4>
 
           <p className="mt-4 text-white/90">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, modi quasi eius recusandae a magnam est ea illum sed possimus et maiores iure, ipsa soluta neque similique. Fugit, tenetur voluptate.
+            El CARPO es un club social de arquería fundado en Noviembre de 2018 en Trevelin. Nació del encuentro entre arqueros apasionados por el deporte, la camaradería y la mejora constante. Hoy es un espacio abierto para aprender, entrenar y compartir la arquería en todas sus modalidades, fomentando valores como el respeto, la disciplina y el trabajo en equipo.
           </p>
         </div>
 
@@ -51,12 +51,12 @@ const Home = () => {
           </h4>
 
           <p className="mt-4 text-white/90">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, modi quasi eius recusandae a magnam est ea illum sed possimus et maiores iure, ipsa soluta neque similique. Fugit, tenetur voluptate.
+            Para asociarte necesitás el Certificado de Iniciación en Arquería de FATARCO. El club dicta cursos durante el año y cuenta con lista de espera. Completá el formulario y sumate a la lista para dar tus primeros pasos en la arquería.
           </p>
 
-          <button className="mt-4 bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
+          <Link to='https://docs.google.com/forms/d/e/1FAIpQLSe2OEq174i2xuH0sroxPtq8vfuLymwAOfR3XJWzzv8zMuE39g/viewform?usp=dialog' className="mt-4 bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
             ¡Quiero ser parte!
-          </button>
+          </Link>
         </div>
 
         <div className="h-[450px]">

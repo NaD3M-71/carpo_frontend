@@ -110,7 +110,7 @@ const FormInscripcionAdmin = ({
           className="w-full rounded border px-3 py-2"
           required
         >
-          <option value="">Seleccionar arquero</option>
+          <option value="" disabled>Seleccionar arquero</option>
           {arqueros.map(a => (
             <option key={a.id} value={a.id}>
               {a.apellido}, {a.nombre}
@@ -130,7 +130,7 @@ const FormInscripcionAdmin = ({
           className="w-full rounded border px-3 py-2"
           required
         >
-          <option value="">Seleccionar</option>
+          <option value="" disabled>Seleccionar</option>
           {TIPOS_ARCO.map(arco => (
             <option key={arco} value={arco}>
               {arco}
@@ -150,7 +150,7 @@ const FormInscripcionAdmin = ({
           className="w-full rounded border px-3 py-2"
           required
         >
-          <option value="">Seleccionar</option>
+          <option value="" disabled>Seleccionar</option>
           {SEXOS.map(s => (
             <option key={s} value={s}>
               {s}
@@ -170,7 +170,7 @@ const FormInscripcionAdmin = ({
           className="w-full rounded border px-3 py-2"
           required
         >
-          <option value="">Seleccionar</option>
+          <option value="" disabled>Seleccionar</option>
           {categorias.map(cat => (
             <option key={cat.id} value={cat.id}>
               {cat.nombre.replaceAll('_', ' ')}

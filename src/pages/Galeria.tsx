@@ -11,15 +11,15 @@ interface Galeria {
 const GALERIAS_INICIALES: Galeria[] = [
   {
     id: 1,
-    titulo: 'Copa CARPO – Fecha 1',
-    descripcion: 'Primer torneo del año',
-    link: 'https://drive.google.com/xxxxx'
+    titulo: 'Cierre de año 2025',
+    descripcion: 'Torneo 3D Cierre de año en Don Edmundo',
+    link: 'https://drive.google.com/drive/folders/17X920S8FH4E39-qJxAcyxYOb4iuGjzW7'
   },
   {
     id: 2,
-    titulo: 'Copa CARPO – Fecha 2',
-    descripcion: 'Viento, frío y buenas flechas',
-    link: 'https://drive.google.com/yyyyy'
+    titulo: 'JJCC - Septiembre 2025',
+    descripcion: 'Juego de Campo organizado por el CARPO',
+    link: 'https://drive.google.com/drive/folders/1az7GTrvjTTsWJEBIAaFAbRLrsVvZi5qS'
   }
 ]
 
