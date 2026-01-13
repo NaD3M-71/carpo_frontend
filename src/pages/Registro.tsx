@@ -109,7 +109,7 @@ const Registro = () => {
         <input name="fechaNacimiento" type="date" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="tipoArco" className='font-bold'>Tipo de Arco Principal</label>
         <select name="tipoArco" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
-          <option value="" disabled>Tipo de arco</option>
+          <option value="" selected disabled>Tipo de arco</option>
           <option value="RASO" >RASO</option>
           <option value="TRADICIONAL" >TRADICIONAL</option>
           <option value="COMPUESTO" >COMPUESTO</option>
@@ -118,17 +118,17 @@ const Registro = () => {
         </select>
         <label htmlFor="lateralidad" className='font-bold'>Lateralidad</label>
         <select name="lateralidad" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
-          <option value="" disabled>Lateralidad</option>
+          <option value="" selected disabled>Lateralidad</option>
           {LATERALIDAD.map(l => <option key={l}>{l}</option>)}
         </select>
         <label htmlFor="sexo" className='font-bold'>Sexo</label>
         <select name="sexo" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
-          <option value="" disabled >Sexo</option>
+          <option value="" selected disabled >Sexo</option>
           {SEXOS.map(s => <option key={s}>{s}</option>)}
         </select>
         <label htmlFor="categoriaGeneral" className='font-bold'>Categoría General (puede cambiar mas adelante)</label>
         <select name="categoriaGeneral" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
-          <option value="" disabled>Categoría</option>
+          <option value="" selected disabled>Categoría</option>
           {CATEGORIAS.map(c => <option key={c}>{c}</option>)}
         </select>
         <label htmlFor="bio" className='font-bold'>Sobre vos, este campo es opcional y puede cambiar cuando consigas mas logros o tengas algo nuevo para contar ;) </label>
