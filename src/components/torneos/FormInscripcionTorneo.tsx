@@ -10,13 +10,6 @@ interface Props {
   onSuccess?: () => void
 }
 
-const TIPOS_ARCO = [
-  'RASO',
-  'RECURVO',
-  'COMPUESTO',
-  'TRADICIONAL',
-  'LONGBOW'
-]
 
 const SEXOS = ['MASCULINO', 'FEMENINO']
 
@@ -97,12 +90,12 @@ const FormInscripcionTorneo = ({
           className="w-full rounded border px-3 py-2"
           required
         >
-          <option value="" disabled>Seleccionar</option>
-          {TIPOS_ARCO.map(arco => (
-            <option key={arco} value={arco}>
-              {arco}
-            </option>
-          ))}
+          <option value="" disabled>Tipo de arco</option>
+          <option value="RASO" >RASO</option>
+          <option value="TRADICIONAL" >TRADICIONAL</option>
+          <option value="COMPUESTO" >COMPUESTO</option>
+          <option value="RECURVO" >RECURVO</option>
+          <option value="LONGBOW" >LONGBOW</option>
         </select>
       </div>
 

@@ -70,7 +70,7 @@ const Registro = () => {
       if (!res.ok) {
         throw new Error('Error en el registro')
       }
-      console.log(res)
+
       alert('Registro exitoso')
       navigate('/login')
     } catch (error) {
@@ -103,7 +103,7 @@ const Registro = () => {
         <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required minLength={6} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="telefono" className='font-bold' >Teléfono </label>
         <input name="telefono" placeholder="Teléfono" required onChange={handleChange} className="w-full border px-3 py-2 rounded" />
-        <label htmlFor="direccion" className='font-bold' >Dirección (opcional)</label>
+        <label htmlFor="direccion" className='font-bold' >Dirección</label>
         <input name="direccion" placeholder="Dirección" required onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="fechaNacimiento" className='font-bold'>Fecha de Nacimiento</label>
         <input name="fechaNacimiento" type="date" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
@@ -114,7 +114,7 @@ const Registro = () => {
           <option value="TRADICIONAL" >TRADICIONAL</option>
           <option value="COMPUESTO" >COMPUESTO</option>
           <option value="RECURVO" >RECURVO</option>
-          <option value="LONGBOW" >RECURVO</option>
+          <option value="LONGBOW" >LONGBOW</option>
         </select>
         <label htmlFor="lateralidad" className='font-bold'>Lateralidad</label>
         <select name="lateralidad" onChange={handleChange} required className="w-full border px-3 py-2 rounded">

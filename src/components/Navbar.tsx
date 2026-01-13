@@ -72,6 +72,8 @@ const Navbar = () => {
           <button
             onClick={() => setMenuAbierto(prev => !prev)}
             className="md:hidden text-white focus:outline-none"
+            title={menuAbierto ? "Cerrar menú" : "Abrir menú"}
+            aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
           >
             <svg
               className="h-7 w-7"
