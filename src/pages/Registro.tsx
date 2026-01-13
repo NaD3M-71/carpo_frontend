@@ -70,7 +70,7 @@ const Registro = () => {
       if (!res.ok) {
         throw new Error('Error en el registro')
       }
-
+      console.log(res)
       alert('Registro exitoso')
       navigate('/login')
     } catch (error) {
