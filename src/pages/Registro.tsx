@@ -102,8 +102,8 @@ const Registro = () => {
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required className="w-full border px-3 py-2 rounded" />
         <label htmlFor="password" className='font-bold'>Contraseña</label>
         <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required className="w-full border px-3 py-2 rounded" />
-        <label htmlFor="telefono" className='font-bold'>Teléfono (opcional)</label>
-        <input name="telefono" placeholder="Teléfono" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
+        <label htmlFor="telefono" className='font-bold' >Teléfono </label>
+        <input name="telefono" placeholder="Teléfono" required onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="direccion" className='font-bold'>Dirección (opcional)</label>
         <input name="direccion" placeholder="Dirección" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="fechaNacimiento" className='font-bold'>Fecha de Nacimiento</label>
