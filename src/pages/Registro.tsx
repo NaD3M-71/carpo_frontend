@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 const REGISTRO_HABILITADO =
   import.meta.env.VITE_REGISTRO_HABILITADO === 'true'
 
-const TIPOS_ARCO = ['RASO', 'RECURVO', 'COMPUESTO', 'TRADICIONAL', 'LONGBOW']
 const LATERALIDAD = ['DIESTRO', 'ZURDO']
 const SEXOS = ['MASCULINO', 'FEMENINO']
 const CATEGORIAS = ['ESCUELA', 'SENIOR']
@@ -104,14 +103,18 @@ const Registro = () => {
         <input name="password" type="password" placeholder="Contraseña" onChange={handleChange} required minLength={6} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="telefono" className='font-bold' >Teléfono </label>
         <input name="telefono" placeholder="Teléfono" required onChange={handleChange} className="w-full border px-3 py-2 rounded" />
-        <label htmlFor="direccion" className='font-bold' >Dirección (opcional) </label>
-        <input name="direccion" placeholder="Dirección" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
+        <label htmlFor="direccion" className='font-bold' >Dirección (opcional)</label>
+        <input name="direccion" placeholder="Dirección" required onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="fechaNacimiento" className='font-bold'>Fecha de Nacimiento</label>
         <input name="fechaNacimiento" type="date" onChange={handleChange} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="tipoArco" className='font-bold'>Tipo de Arco Principal</label>
         <select name="tipoArco" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
           <option value="" disabled>Tipo de arco</option>
-          {TIPOS_ARCO.map(t => <option key={t}>{t}</option>)}
+          <option value="RASO" >RASO</option>
+          <option value="TRADICIONAL" >TRADICIONAL</option>
+          <option value="COMPUESTO" >COMPUESTO</option>
+          <option value="RECURVO" >RECURVO</option>
+          <option value="LONGBOW" >RECURVO</option>
         </select>
         <label htmlFor="lateralidad" className='font-bold'>Lateralidad</label>
         <select name="lateralidad" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
@@ -126,11 +129,7 @@ const Registro = () => {
         <label htmlFor="categoriaGeneral" className='font-bold'>Categoría General (puede cambiar mas adelante)</label>
         <select name="categoriaGeneral" onChange={handleChange} required className="w-full border px-3 py-2 rounded">
           <option value="" disabled>Categoría</option>
-          <option value="RASO" >RASO</option>
-          <option value="TRADICIONAL" >TRADICIONAL</option>
-          <option value="COMPUESTO" >COMPUESTO</option>
-          <option value="RECURVO" >RECURVO</option>
-          <option value="LONGBOW" >LONGBOW</option>
+          {CATEGORIAS.map(c => <option key={c}>{c}</option>)}
         </select>
         <label htmlFor="bio" className='font-bold'>Sobre vos, este campo es opcional y puede cambiar cuando consigas mas logros o tengas algo nuevo para contar ;) </label>
         <textarea
