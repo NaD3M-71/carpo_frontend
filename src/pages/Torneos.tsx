@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getTorneos } from '../api/torneos'
 import type { Torneo } from '../types/Torneo'
 import TorneosSection from '../components/torneos/TorneosSection'
+import { Link } from 'react-router-dom'
 
 const TorneosIndex = () => {
   const [torneos, setTorneos] = useState<Torneo[]>([])
@@ -31,6 +32,9 @@ const cerrados = torneos.filter(t => t.estado === 'CERRADO')
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 space-y-16">
+      <Link to={'/copa-carpo'} className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">
+        Ver Resultados Copa CARPO
+      </Link>
       <TorneosSection
         titulo="Torneos Abiertos"
         torneos={abiertos}

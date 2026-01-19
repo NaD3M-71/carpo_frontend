@@ -96,7 +96,7 @@ const Registro = () => {
         <label htmlFor="apellido" className='font-bold'>Apellido</label>
         <input name="apellido" placeholder="Apellido" onChange={handleChange} required maxLength={100} className="w-full border px-3 py-2 rounded" />
         <label htmlFor="dni" className='font-bold'>DNI</label>
-        <input name="dni" placeholder="DNI" onChange={handleChange} required className="w-full border px-3 py-2 rounded" />
+        <input name="dni" type="number" placeholder="DNI" onChange={handleChange} required className="w-full border px-3 py-2 rounded" />
         <label htmlFor="email" className='font-bold'>Email</label>
         <input name="email" type="email" placeholder="Email" onChange={handleChange} required className="w-full border px-3 py-2 rounded" />
         <label htmlFor="password" className='font-bold'>Contraseña</label>

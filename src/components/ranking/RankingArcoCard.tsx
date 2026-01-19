@@ -45,9 +45,12 @@ const RankingArcoCard = ({ tipoArco }: Props) => {
     .filter(r => r.sexo === 'FEMENINO')
     .slice(0, 3)
 
+  const escuela = data.escuela.ranking.slice(0, 3)
+
   return (
     <div className="h-full rounded-xl bg-black/70 p-4 m-4 text-white">
       <h3 className="mb-3 text-lg font-bold text-center">{tipoArco}</h3>
+
 
       <div>
         <p className="text-sm opacity-70 text-center">Masculino</p>
@@ -58,7 +61,7 @@ const RankingArcoCard = ({ tipoArco }: Props) => {
         ))}
       </div>
 
-      <div className="mt-3 border-t border-white/10 pt-2">
+      <div className="mt-3 border-y border-white/10 py-2">
         <p className="text-sm opacity-70 text-center">Femenino</p>
         {femenino.map((r, i) => (
           <p key={r.arqueroId}>
@@ -66,6 +69,16 @@ const RankingArcoCard = ({ tipoArco }: Props) => {
           </p>
         ))}
       </div>
+      {escuela.length > 0 && (
+        <div className="mb-3">
+          <p className="text-sm opacity-70 text-center">Escuela</p>
+          {escuela.map((r, i) => (
+            <p key={r.arqueroId}>
+              {i + 1}. {r.arquero} ({r.puntosTotal})
+            </p>
+          ))}
+        </div>
+      )}
       <div>
         {/* <Link className='rounded-xl bg-red-600 text-white m-auto mt-4 p-5' to='#'>Ver Todos</Link> */}
       </div>

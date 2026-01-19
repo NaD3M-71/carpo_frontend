@@ -1,7 +1,7 @@
 
 import RankingSlider from "../components/ranking/RankingSlider"
 import TorneosPreview from "../components/TorneoPreview"
-import { Link } from 'react-router-dom'
+
 
 const Home = () => {
   return (
@@ -42,7 +42,7 @@ const Home = () => {
         <RankingSlider />
       </div>
       <div className="pt-2 grid md:grid-cols-[1fr_2fr] gap-10 max-w-7xl mx-auto items-center bg-blue-400 p-5 w-full rounded-2xl">
-        <div>
+        <div className="block">
           <h1 className="text-5xl font-bold text-white">
             ¿QUERÉS SER PARTE?
           </h1>
@@ -50,10 +50,17 @@ const Home = () => {
           <p className="mt-4 text-white/90">
             Para asociarte necesitás el Certificado de Iniciación en Arquería de FATARCO. El club dicta cursos durante el año y cuenta con lista de espera. Completá el formulario y sumate a la lista para dar tus primeros pasos en la arquería.
           </p>
+          <div>
+            <a
+              href="https://docs.google.com/forms/..."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-6 bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors"
+            >
+              ¡Quiero ser parte!
+            </a>
 
-          <Link to='https://docs.google.com/forms/d/e/1FAIpQLSe2OEq174i2xuH0sroxPtq8vfuLymwAOfR3XJWzzv8zMuE39g/viewform?usp=dialog' className="mt-4 bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors">
-            ¡Quiero ser parte!
-          </Link>
+          </div>
         </div>
 
         <div className="h-[450px]">

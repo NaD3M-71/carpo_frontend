@@ -5,6 +5,7 @@ export interface RankingItem {
   arqueroId: number
   arquero: string
   sexo: 'MASCULINO' | 'FEMENINO'
+  categoria: 'ESCUELA' | 'SENIOR'
   puntosTotal: number
   torneosParticipados: number
 }

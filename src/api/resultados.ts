@@ -30,3 +30,12 @@ export const guardarResultados = async (
 
   return res.json()
 }
+
+
+export const getResultados = async (anio :number) =>{
+  const res = await fetch(
+    `${import.meta.env.VITE_API_URL}/participaciones/tabla-general/${anio}`
+  )
+
+  return res.json()
+}

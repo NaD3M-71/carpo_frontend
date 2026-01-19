@@ -13,6 +13,7 @@ import Registro from './pages/Registro'
 import Arqueros from './pages/Arqueros'
 import Galeria from './pages/Galeria'
 import PerfilArquero from './pages/Perfil'
+import CopaCarpoResultados from './pages/CopaCarpoResultados'
 
 function App() {
   const AdminRoute = ({ children }: { children: JSX.Element }) => {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/perfil" element={<PerfilArquero />} />
 
         <Route path="/torneos" element={<TorneosIndex />} />
+        <Route path="/copa-carpo" element={<CopaCarpoResultados />} />
         <Route path="/torneos/:id" element={<TorneosDetalle />} />
         <Route path="/torneos/:id/inscribirse" element={<InscripcionTorneo />} />
 
