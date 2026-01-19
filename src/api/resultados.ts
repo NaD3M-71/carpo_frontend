@@ -1,4 +1,5 @@
-import axios from "axios"
+
+import api from "./axios"
 
 // services/resultados.ts
 interface PuntajePayload {
@@ -15,26 +16,14 @@ export const guardarResultados = async (
   torneoId: number,
   puntajes: PuntajePayload[]
 ) => {
-  const token = localStorage.getItem('token')
+  try{
+  const { data } = await api.patch(
+    `/participaciones/${torneoId}/resultados`,
+    { puntajes }
+  )
 
-  if (!token) {
-    throw new Error('Usuario no autenticado')
-  }
-
-  try {
-    const { data } = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/participaciones/${torneoId}/resultados`,
-      { puntajes },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    )
-
-    return data
-  } catch (error) {
+  return data
+}catch (error) {
     console.error(error)
     throw new Error('Error al guardar resultados')
   }
