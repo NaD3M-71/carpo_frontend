@@ -6,4 +6,21 @@ body {
   --color-brand: #3437D6E5;
 
   --font-sans: "Google Sans Flex", system-ui, sans-serif;
+   
 }
+
+/* Keyframes */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33333%);
+  }
+}
+
+/* Utility Tailwind */
+@utility animate-scroll {
+  animation: scroll 35s linear infinite;
+}
+

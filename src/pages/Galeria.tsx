@@ -20,7 +20,25 @@ const GALERIAS_INICIALES: Galeria[] = [
     titulo: 'JJCC - Septiembre 2025',
     descripcion: 'Juego de Campo organizado por el CARPO',
     link: 'https://drive.google.com/drive/folders/1az7GTrvjTTsWJEBIAaFAbRLrsVvZi5qS'
+  },{
+    id: 3,
+    titulo: 'Torneo Homologatorio 3D - Febrero 2026 ',
+    descripcion: 'Homologatorio 3D en Cabañas Don Edmundo',
+    link: 'https://drive.google.com/drive/folders/1l0JIKMZdDelCi2kAmBkKbv-pb36rt-gD'
   }
+  ,{
+    id: 4,
+    titulo: 'Copa Carpo Fecha 2 - Parte 1  ',
+    descripcion: '3D en Nawal Febrero 2026',
+    link: 'https://drive.google.com/drive/folders/11aSnznmt4aWvxnM8gf5zzTHRsgawGzij'
+  }
+  ,{
+    id: 5,
+    titulo: 'Copa Carpo Fecha 2 - Parte 2  ',
+    descripcion: '3D en Nawal Febrero 2026',
+    link: 'https://drive.google.com/drive/folders/1Yuw3oFa-MZajCEIWbR6Emu4Hitfc6lQU?usp=drive_link'
+  }
+
 ]
 
 const Galeria = () => {
@@ -86,7 +104,7 @@ const Galeria = () => {
     <div className="mx-auto max-w-6xl px-4 py-10">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white">
-          Galería de fotos
+          Galerías de fotos
         </h1>
 
         {esAdmin && (
