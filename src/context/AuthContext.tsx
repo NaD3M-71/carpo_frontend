@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import api from '../api/axios'
 
 interface User {
   id: number
@@ -11,7 +12,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null
-  login: (token: string, usuario: User) => void
+  login: ( usuario: User) => void
   logout: () => void
   loading: boolean
 }
@@ -24,29 +25,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // 👉 Al refrescar la página
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    const storedUser = localStorage.getItem('user')
 
-    if (token && storedUser) {
+    const checkAuth = async ()=>{
       try {
-        setUser(JSON.parse(storedUser))
-      } catch {
-        logout()
+        const { data } = await api.get('/arqueros/me')
+        setUser(data)
+      } catch(error){
+        console.log(error);
+        setUser(null)
+      } finally {
+        setLoading(false)
       }
     }
-
-    setLoading(false)
+    
+    checkAuth()
   }, [])
 
-  const login = (token: string, usuario: User) => {
-    localStorage.setItem('token', token)
-    localStorage.setItem('user', JSON.stringify(usuario))
+  const login = (usuario: User) => {
     setUser(usuario)
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
+    try{
+      api.post('/arqueros/logout')
+
+    }catch(error){
+      console.log(error);
+    }
     setUser(null)
   }
 

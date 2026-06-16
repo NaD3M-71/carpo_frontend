@@ -14,6 +14,8 @@ import Arqueros from './pages/Arqueros'
 import Galeria from './pages/Galeria'
 import PerfilArquero from './pages/Perfil'
 import CopaCarpoResultados from './pages/CopaCarpoResultados'
+import OlvidePassword from './pages/Auth/OlvidePassword'
+import ResetPassword from './pages/Auth/ResetPassword'
 
 function App() {
   const AdminRoute = ({ children }: { children: JSX.Element }) => {
@@ -33,6 +35,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/olvide-password" element={<OlvidePassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/arqueros" element={<Arqueros />} />
         <Route path="/galeria" element={<Galeria />} />
         <Route path="/perfil" element={<PerfilArquero />} />

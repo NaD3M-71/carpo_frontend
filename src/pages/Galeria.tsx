@@ -1,59 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import {
+  type Galeria,
+  getGalerias,
+  crearGaleria,
+  actualizarGaleria,
+  eliminarGaleria
+} from '../api/galerias'
 
-interface Galeria {
-  id: number
-  titulo: string
-  descripcion?: string
-  link: string
-}
-
-const GALERIAS_INICIALES: Galeria[] = [
-  {
-    id: 1,
-    titulo: 'Cierre de año 2025',
-    descripcion: 'Torneo 3D Cierre de año en Don Edmundo',
-    link: 'https://drive.google.com/drive/folders/17X920S8FH4E39-qJxAcyxYOb4iuGjzW7'
-  },
-  {
-    id: 2,
-    titulo: 'JJCC - Septiembre 2025',
-    descripcion: 'Juego de Campo organizado por el CARPO',
-    link: 'https://drive.google.com/drive/folders/1az7GTrvjTTsWJEBIAaFAbRLrsVvZi5qS'
-  },{
-    id: 3,
-    titulo: 'Torneo Homologatorio 3D - Febrero 2026 ',
-    descripcion: 'Homologatorio 3D en Cabañas Don Edmundo',
-    link: 'https://drive.google.com/drive/folders/1l0JIKMZdDelCi2kAmBkKbv-pb36rt-gD'
-  }
-  ,{
-    id: 4,
-    titulo: 'Copa Carpo Fecha 2 - Parte 1  ',
-    descripcion: '3D en Nawal Febrero 2026',
-    link: 'https://drive.google.com/drive/folders/11aSnznmt4aWvxnM8gf5zzTHRsgawGzij'
-  }
-  ,{
-    id: 5,
-    titulo: 'Copa Carpo Fecha 2 - Parte 2  ',
-    descripcion: '3D en Nawal Febrero 2026',
-    link: 'https://drive.google.com/drive/folders/1Yuw3oFa-MZajCEIWbR6Emu4Hitfc6lQU?usp=drive_link'
-  }
-
-]
-
-const Galeria = () => {
+const GaleriaPage = () => {
   const { user } = useAuth()
   const esAdmin = user?.rol === 'ADMIN' || user?.rol === 'SUPERADMIN'
 
-  const [galerias, setGalerias] = useState(GALERIAS_INICIALES)
+  const [galerias, setGalerias] = useState<Galeria[]>([])
+  const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [editando, setEditando] = useState<Galeria | null>(null)
+  const [guardando, setGuardando] = useState(false)
 
   const [form, setForm] = useState({
     titulo: '',
     descripcion: '',
     link: ''
   })
+
+  useEffect(() => {
+    getGalerias()
+      .then(setGalerias)
+      .finally(() => setLoading(false))
+  }, [])
 
   const abrirNueva = () => {
     setEditando(null)
@@ -71,33 +46,42 @@ const Galeria = () => {
     setModalOpen(true)
   }
 
-  const guardar = () => {
+  const guardar = async () => {
     if (!form.titulo || !form.link) return
-
-    if (editando) {
-      setGalerias(prev =>
-        prev.map(g =>
-          g.id === editando.id ? { ...g, ...form } : g
-        )
-      )
-    } else {
-      setGalerias(prev => [
-        ...prev,
-        {
-          id: Date.now(),
-          ...form
-        }
-      ])
+    setGuardando(true)
+    try {
+      if (editando) {
+        const actualizada = await actualizarGaleria(editando.id, form)
+        setGalerias(prev => prev.map(g => g.id === editando.id ? actualizada : g))
+      } else {
+        const nueva = await crearGaleria(form)
+        setGalerias(prev => [nueva, ...prev])
+      }
+      setModalOpen(false)
+    } catch {
+      alert('Error al guardar la galería')
+    } finally {
+      setGuardando(false)
     }
-
-    setModalOpen(false)
   }
 
-  const eliminar = (id: number) => {
+  const eliminar = async (id: number) => {
     const ok = confirm('¿Eliminar esta galería?')
     if (!ok) return
+    try {
+      await eliminarGaleria(id)
+      setGalerias(prev => prev.filter(g => g.id !== id))
+    } catch {
+      alert('Error al eliminar la galería')
+    }
+  }
 
-    setGalerias(prev => prev.filter(g => g.id !== id))
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-10 text-white text-center">
+        Cargando galerías...
+      </div>
+    )
   }
 
   return (
@@ -109,6 +93,7 @@ const Galeria = () => {
 
         {esAdmin && (
           <button
+            type="button"
             onClick={abrirNueva}
             className="rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700"
           >
@@ -126,12 +111,14 @@ const Galeria = () => {
             {esAdmin && (
               <div className="absolute top-2 right-2 flex gap-2 text-sm">
                 <button
+                  type="button"
                   onClick={() => abrirEditar(g)}
                   className="text-blue-600 hover:underline"
                 >
                   Editar
                 </button>
                 <button
+                  type="button"
                   onClick={() => eliminar(g.id)}
                   className="text-red-600 hover:underline"
                 >
@@ -162,7 +149,6 @@ const Galeria = () => {
         ))}
       </div>
 
-      {/* MODAL */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-6 w-full max-w-md space-y-4">
@@ -193,16 +179,19 @@ const Galeria = () => {
 
             <div className="flex justify-end gap-2">
               <button
+                type="button"
                 onClick={() => setModalOpen(false)}
                 className="px-4 py-2 rounded bg-gray-300"
+                disabled={guardando}
               >
                 Cancelar
               </button>
               <button
                 onClick={guardar}
-                className="px-4 py-2 rounded bg-blue-600 text-white font-semibold"
+                disabled={guardando}
+                className="px-4 py-2 rounded bg-blue-600 text-white font-semibold disabled:opacity-60"
               >
-                Guardar
+                {guardando ? 'Guardando...' : 'Guardar'}
               </button>
             </div>
           </div>
@@ -212,4 +201,4 @@ const Galeria = () => {
   )
 }
 
-export default Galeria
+export default GaleriaPage
