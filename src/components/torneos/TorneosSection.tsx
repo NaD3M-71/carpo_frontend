@@ -5,9 +5,10 @@ interface Props {
   titulo: string
   torneos: Torneo[]
   estado: 'ABIERTO' | 'CERRADO'
+  onEdit?: (torneo: Torneo) => void
 }
 
-const TorneosSection = ({ titulo, torneos, estado }: Props) => {
+const TorneosSection = ({ titulo, torneos, estado, onEdit }: Props) => {
   if (torneos.length === 0) {
     return (
       <section>
@@ -29,6 +30,7 @@ const TorneosSection = ({ titulo, torneos, estado }: Props) => {
             key={torneo.id}
             torneo={torneo}
             estado={estado}
+            onEdit={onEdit}
           />
         ))}
       </div>

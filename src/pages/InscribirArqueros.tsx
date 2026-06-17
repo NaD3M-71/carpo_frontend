@@ -11,7 +11,8 @@ import {
   desinscribirseDelTorneo
 } from '../api/torneos'
 
-
+import InscriptosPorPatrullas from '../components/torneos/InscriptosPorPatrullas'
+import { exportarPlanilla } from '../utils/exportPlanilla'
 
 import type { Torneo } from '../types/Torneo'
 import type { CategoriaEspecifica } from '../types/CategoriaEspecifica'
@@ -177,9 +178,9 @@ const InscribirArqueros = () => {
         </button>
       </form>
 
-      {/* LISTADO */}
+      {/* LISTADO DE GESTIÓN */}
       <div className="bg-white rounded-xl shadow p-6">
-        <h3 className="font-semibold mb-4">Inscriptos</h3>
+        <h3 className="font-semibold mb-4">Inscriptos ({inscriptos.length})</h3>
 
         {inscriptos.map(p => (
           <div
@@ -191,6 +192,7 @@ const InscribirArqueros = () => {
             </span>
 
             <button
+              type="button"
               onClick={() => handleDesinscribir(p)}
               className="text-sm text-red-600 hover:underline"
             >
@@ -200,7 +202,28 @@ const InscribirArqueros = () => {
         ))}
       </div>
 
+      {/* VISTA DE PATRULLAS */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-white">Vista de patrullas</h2>
+          <button
+            type="button"
+            onClick={() => exportarPlanilla(inscriptos, torneo.modalidad, torneo.nombre)}
+            disabled={inscriptos.length === 0}
+            className="rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Exportar planilla
+          </button>
+        </div>
+
+        <InscriptosPorPatrullas
+          inscriptos={inscriptos}
+          modalidad={torneo.modalidad}
+        />
+      </div>
+
       <button
+        type="button"
         onClick={() => navigate(-1)}
         className="text-sm text-white/70 hover:underline"
       >
