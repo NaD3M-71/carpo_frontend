@@ -5,11 +5,14 @@ export interface ParticipacionesResponse {
 
 export interface Participacion {
   id: number
-  arqueroId: number
+  arqueroId: number | null
   torneoId: number
   categoriaEspecificaId: number
   tipoArco: string
   sexo: string
+  esInvitado: boolean
+  invitadoNombre: string | null
+  invitadoApellido: string | null
   puntajeClasificacion: number | null
   posicionClasificacion: number | null
   esMejorClasificacion: boolean
@@ -20,7 +23,7 @@ export interface Participacion {
   puntosTotal: number
   createdAt: string
   updatedAt: string
-  arquero: Arquero
+  arquero: Arquero | null
   categoriaEspecifica: CategoriaEspecifica
 }
 

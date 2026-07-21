@@ -2,6 +2,7 @@ import * as XLSX from 'xlsx'
 import type { Participacion } from '../types/Participaciones'
 import { getEstacaColor, getEstacaInfo, ordenarEstacas, MODALIDADES_POR_ESTACA } from './estacas'
 import type { EstacaColor } from './estacas'
+import { getNombreCompletoParticipante } from './participantes'
 
 const TOTAL_PATRULLAS = 12
 const ARQUEROS_POR_PATRULLA = 4
@@ -33,7 +34,7 @@ function buildFilasInscriptos(inscriptos: Participacion[], modalidad: string): s
         for (const [sexo, lista] of Object.entries(sexos)) {
           if (sexo !== 'UNISEX') rows.push([`    ${sexo}`])
           for (const p of lista) {
-            rows.push([`    ${p.arquero.apellido}, ${p.arquero.nombre}`])
+            rows.push([`    ${getNombreCompletoParticipante(p)}${p.esInvitado ? ' (Invitado)' : ''}`])
           }
         }
         rows.push([''])
@@ -60,7 +61,7 @@ function buildFilasInscriptos(inscriptos: Participacion[], modalidad: string): s
         for (const [sexo, lista] of Object.entries(sexos)) {
           if (sexo !== 'UNISEX') rows.push([`    ${sexo}`])
           for (const p of lista) {
-            rows.push([`    ${p.arquero.apellido}, ${p.arquero.nombre}`])
+            rows.push([`    ${getNombreCompletoParticipante(p)}${p.esInvitado ? ' (Invitado)' : ''}`])
           }
         }
         rows.push([''])

@@ -13,6 +13,7 @@ import {
 
 import InscriptosPorPatrullas from '../components/torneos/InscriptosPorPatrullas'
 import { exportarPlanilla } from '../utils/exportPlanilla'
+import { getNombreCompletoParticipante } from '../utils/participantes'
 
 import type { Torneo } from '../types/Torneo'
 import type { CategoriaEspecifica } from '../types/CategoriaEspecifica'
@@ -37,6 +38,11 @@ const InscribirArqueros = () => {
   const [tipoArco, setTipoArco] = useState('')
   const [sexo, setSexo] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const [modoInvitado, setModoInvitado] = useState(false)
+  const [invitadoNombre, setInvitadoNombre] = useState('')
+  const [invitadoApellido, setInvitadoApellido] = useState('')
+  const [invitadoClub, setInvitadoClub] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,17 +73,25 @@ const InscribirArqueros = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!arqueroId || !categoriaEspecificaId) return
+    if (!categoriaEspecificaId) return
+    if (!modoInvitado && !arqueroId) return
+    if (modoInvitado && (!invitadoNombre || !invitadoApellido)) return
 
     try {
       setLoading(true)
 
+      const nombreConClub = invitadoClub.trim()
+        ? `${invitadoNombre} (${invitadoClub.trim().toUpperCase()})`
+        : invitadoNombre
+
       await inscribirseATorneo({
         torneoId: torneo.id,
-        arqueroId,
         categoriaEspecificaId,
         tipoArco,
-        sexo
+        sexo,
+        ...(modoInvitado
+          ? { esInvitado: true, invitadoNombre: nombreConClub, invitadoApellido }
+          : { arqueroId: arqueroId as number })
       })
 
       const inscriptosActualizados = await getInscriptos(torneo.id)
@@ -87,6 +101,9 @@ const InscribirArqueros = () => {
       setCategoriaEspecificaId('')
       setTipoArco('')
       setSexo('')
+      setInvitadoNombre('')
+      setInvitadoApellido('')
+      setInvitadoClub('')
     } catch (error) {
       console.error(error)
       alert('No se pudo inscribir el arquero')
@@ -99,7 +116,7 @@ const InscribirArqueros = () => {
     const ok = confirm('¿Desinscribir este arquero?')
     if (!ok) return
 
-    await desinscribirseDelTorneo(p.torneoId, p.arqueroId)
+    await desinscribirseDelTorneo(p.id)
     const actualizados = await getInscriptos(torneo.id)
     setInscriptos(actualizados)
   }
@@ -117,19 +134,57 @@ const InscribirArqueros = () => {
       >
         <h3 className="text-lg font-semibold">Inscribir arquero</h3>
 
-        <select
-          value={arqueroId}
-          onChange={e => setArqueroId(Number(e.target.value))}
-          className="w-full rounded border px-3 py-2"
-          required
-        >
-          <option value="">Seleccionar arquero</option>
-          {arqueros.map(a => (
-            <option key={a.id} value={a.id}>
-              {a.apellido}, {a.nombre}
-            </option>
-          ))}
-        </select>
+        <label className="flex items-center gap-2 text-sm font-medium">
+          <input
+            type="checkbox"
+            checked={modoInvitado}
+            onChange={e => setModoInvitado(e.target.checked)}
+          />
+          Inscribir invitado (no socio)
+        </label>
+
+        {modoInvitado ? (
+          <>
+            <input
+              type="text"
+              placeholder="Nombre del invitado"
+              value={invitadoNombre}
+              onChange={e => setInvitadoNombre(e.target.value)}
+              className="w-full rounded border px-3 py-2"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Apellido del invitado"
+              value={invitadoApellido}
+              onChange={e => setInvitadoApellido(e.target.value)}
+              className="w-full rounded border px-3 py-2"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Club (opcional)"
+              value={invitadoClub}
+              onChange={e => setInvitadoClub(e.target.value)}
+              className="w-full rounded border px-3 py-2"
+            />
+          </>
+        ) : (
+          <select
+            title="Arquero"
+            value={arqueroId}
+            onChange={e => setArqueroId(Number(e.target.value))}
+            className="w-full rounded border px-3 py-2"
+            required
+          >
+            <option value="">Seleccionar arquero</option>
+            {arqueros.map(a => (
+              <option key={a.id} value={a.id}>
+                {a.apellido}, {a.nombre}
+              </option>
+            ))}
+          </select>
+        )}
 
         <select
           value={tipoArco}
@@ -188,7 +243,12 @@ const InscribirArqueros = () => {
             className="flex justify-between items-center border-b py-2"
           >
             <span>
-              {p.arquero.apellido}, {p.arquero.nombre}
+              {getNombreCompletoParticipante(p)}
+              {p.esInvitado && (
+                <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-700">
+                  Invitado
+                </span>
+              )}
             </span>
 
             <button

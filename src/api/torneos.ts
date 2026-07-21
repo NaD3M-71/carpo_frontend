@@ -44,10 +44,13 @@ export const getInscriptos = async (
 
 export interface InscripcionPayload {
   torneoId: number
-  arqueroId: number
   categoriaEspecificaId: number
   tipoArco: string
   sexo: string
+  arqueroId?: number
+  esInvitado?: boolean
+  invitadoNombre?: string
+  invitadoApellido?: string
 }
 
 export const inscribirseATorneo = async (
@@ -62,11 +65,10 @@ export const inscribirseATorneo = async (
 }
 
 export const desinscribirseDelTorneo = async (
-  torneoId: number,
-  arqueroId: number
+  participacionId: number
 ) => {
   const { data } = await api.delete(
-    `${import.meta.env.VITE_API_URL}/participaciones/${torneoId}/${arqueroId}`
+    `${import.meta.env.VITE_API_URL}/participaciones/${participacionId}`
   )
   return data
 }

@@ -1,6 +1,7 @@
 import type { Participacion } from '../../types/Participaciones'
 import { getEstacaColor, getEstacaInfo, ordenarEstacas, MODALIDADES_POR_ESTACA } from '../../utils/estacas'
 import type { EstacaColor } from '../../utils/estacas'
+import { getNombreCompletoParticipante } from '../../utils/participantes'
 
 interface Props {
   inscriptos: Participacion[]
@@ -9,7 +10,12 @@ interface Props {
 
 const NombreRow = ({ p }: { p: Participacion }) => (
   <p className="text-white text-sm py-0.5">
-    {p.arquero.apellido}, {p.arquero.nombre}
+    {getNombreCompletoParticipante(p)}
+    {p.esInvitado && (
+      <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-700">
+        Invitado
+      </span>
+    )}
   </p>
 )
 

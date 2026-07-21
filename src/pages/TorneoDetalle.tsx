@@ -58,10 +58,7 @@ const TorneoDetalle = () => {
     if (!ok) return
 
     try {
-      await desinscribirseDelTorneo(
-        participacionDelUsuario.torneoId,
-        participacionDelUsuario.arqueroId
-      )
+      await desinscribirseDelTorneo(participacionDelUsuario.id)
 
       await refetchInscriptos()
     } catch (error) {

@@ -31,7 +31,7 @@ const InscriptosPorCategoria = ({ inscriptos }: Props) => {
 
     const sexo =
       division === 'SENIOR'
-        ? inscripto.arquero.sexo
+        ? inscripto.sexo
         : 'UNISEX'
 
     acc[tipoArco] ??= {}

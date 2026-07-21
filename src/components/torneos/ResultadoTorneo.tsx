@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getInscriptos } from '../../api/torneos'
 import { guardarResultados } from '../../api/resultados'
 import type { Participacion } from '../../types/Participaciones'
+import { getNombreCompletoParticipante } from '../../utils/participantes'
 
 type Medalla = 'ORO' | 'PLATA' | 'BRONCE'
 
@@ -37,7 +38,12 @@ const FilaResultado = ({
 }) => (
   <tr className="even:bg-sky-50/50">
     <td className="border px-2 py-1">
-      {p.arquero.apellido}, {p.arquero.nombre}
+      {getNombreCompletoParticipante(p)}
+      {p.esInvitado && (
+        <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-700">
+          Invitado
+        </span>
+      )}
     </td>
     <td className="border px-2 py-1">
       <input
