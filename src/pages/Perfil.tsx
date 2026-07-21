@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getMe } from '../api/arqueros'
+import { sanitizeBioHtml } from '../utils/sanitizeHtml'
 
 interface PerfilPropio {
   nombre: string
@@ -113,7 +114,10 @@ const PerfilArquero = () => {
         </h2>
 
         {tieneBio ? (
-          <p>{arquero.bio}</p>
+          <div
+            className="bio-content"
+            dangerouslySetInnerHTML={{ __html: sanitizeBioHtml(arquero.bio) }}
+          />
         ) : (
           <p className="italic text-gray-600">
             Este arquero está demasiado ocupado afinando la puntería como para

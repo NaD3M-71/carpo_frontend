@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getMe, actualizarPerfil, type PerfilPayload } from '../api/arqueros'
+import TrixEditor from '../components/TrixEditor'
 
 const TIPOS_ARCO = ['RASO', 'TRADICIONAL', 'COMPUESTO', 'RECURVO', 'LONGBOW']
 const LATERALIDAD = ['DIESTRO', 'ZURDO']
@@ -72,6 +73,10 @@ const EditarPerfil = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleBioChange = (html: string) => {
+    setForm((prev) => ({ ...prev, bio: html }))
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -219,12 +224,11 @@ const EditarPerfil = () => {
         </select>
 
         <label htmlFor="bio" className="font-bold">Biografía</label>
-        <textarea
+        <TrixEditor
           name="bio"
           value={form.bio}
-          onChange={handleChange}
-          rows={4}
-          className="w-full border px-3 py-2 rounded"
+          onChange={handleBioChange}
+          placeholder="Contanos sobre vos..."
         />
 
         <div className="flex gap-3">

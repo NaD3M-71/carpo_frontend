@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { getArqueroPublico, getArqueroCompleto } from '../api/arqueros'
 import type { ArqueroPublico, ArqueroCompleto } from '../types/Arquero'
+import { sanitizeBioHtml } from '../utils/sanitizeHtml'
 
 const ArqueroDetalle = () => {
   const { id } = useParams<{ id: string }>()
@@ -122,7 +123,10 @@ const ArqueroDetalle = () => {
       <div className="rounded-xl bg-white p-6 text-gray-800 shadow">
         <h2 className="text-lg font-bold mb-2">Biografía</h2>
         {tieneBio ? (
-          <p>{arquero.bio}</p>
+          <div
+            className="bio-content"
+            dangerouslySetInnerHTML={{ __html: sanitizeBioHtml(arquero.bio) }}
+          />
         ) : (
           <p className="italic text-gray-600">
             Este arquero está demasiado ocupado afinando la puntería como para
