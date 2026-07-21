@@ -4,16 +4,24 @@ import api from '../api/axios'
 interface User {
   id: number
   nombre: string
+  apellido?: string
   email: string
   rol: string
   tipoArco: string
+  lateralidad?: string
+  categoriaGeneral?: string
   sexo: string
+  bio?: string | null
+  telefono?: string | null
+  direccion?: string | null
+  fechaNacimiento?: string | null
 }
 
 interface AuthContextType {
   user: User | null
   login: ( usuario: User) => void
   logout: () => void
+  updateUser: (datos: Partial<User>) => void
   loading: boolean
 }
 
@@ -55,8 +63,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null)
   }
 
+  const updateUser = (datos: Partial<User>) => {
+    setUser((prev) => (prev ? { ...prev, ...datos } : prev))
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser, loading }}>
       {children}
     </AuthContext.Provider>
   )

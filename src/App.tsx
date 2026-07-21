@@ -11,8 +11,10 @@ import type { JSX } from 'react'
 import ResultadosTorneo from './components/torneos/ResultadoTorneo'
 import Registro from './pages/Registro'
 import Arqueros from './pages/Arqueros'
+import ArqueroDetalle from './pages/ArqueroDetalle'
 import Galeria from './pages/Galeria'
 import PerfilArquero from './pages/Perfil'
+import EditarPerfil from './pages/EditarPerfil'
 import CopaCarpoResultados from './pages/CopaCarpoResultados'
 import OlvidePassword from './pages/Auth/OlvidePassword'
 import ResetPassword from './pages/Auth/ResetPassword'
@@ -38,8 +40,10 @@ function App() {
         <Route path="/olvide-password" element={<OlvidePassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/arqueros" element={<Arqueros />} />
+        <Route path="/arqueros/:id" element={<ArqueroDetalle />} />
         <Route path="/galeria" element={<Galeria />} />
         <Route path="/perfil" element={<PerfilArquero />} />
+        <Route path="/editar-perfil" element={<EditarPerfil />} />
 
         <Route path="/torneos" element={<TorneosIndex />} />
         <Route path="/copa-carpo" element={<CopaCarpoResultados />} />
