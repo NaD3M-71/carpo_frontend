@@ -1,11 +1,24 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { getArqueroById } from '../api/torneos'
-import type { Arqueros } from '../types/Arquero'
+import { getMe } from '../api/arqueros'
+
+interface PerfilPropio {
+  nombre: string
+  apellido: string
+  email: string
+  sexo: string
+  telefono: string | null
+  direccion: string | null
+  tipoArco: string
+  lateralidad: string
+  categoriaGeneral: string
+  bio: string | null
+}
 
 const PerfilArquero = () => {
   const { user } = useAuth()
-  const [arquero, setArquero] = useState<Arqueros | null>(null)
+  const [arquero, setArquero] = useState<PerfilPropio | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -13,7 +26,7 @@ const PerfilArquero = () => {
 
     const fetchPerfil = async () => {
       try {
-        const data = await getArqueroById(user.id)
+        const data = await getMe()
         setArquero(data)
       } catch (error) {
         console.error(error)
@@ -53,9 +66,17 @@ const PerfilArquero = () => {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 text-white space-y-8">
-      <h1 className="text-3xl font-bold">
-        Mi perfil
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">
+          Mi perfil
+        </h1>
+        <Link
+          to="/editar-perfil"
+          className="rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold hover:bg-blue-700"
+        >
+          Editar perfil
+        </Link>
+      </div>
 
       {/* GRID PERFIL */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -69,6 +90,8 @@ const PerfilArquero = () => {
           <p><strong>Nombre:</strong> {arquero.nombre} {arquero.apellido}</p>
           <p><strong>Email:</strong> {arquero.email}</p>
           <p><strong>Sexo:</strong> {arquero.sexo}</p>
+          {arquero.telefono && <p><strong>Teléfono:</strong> {arquero.telefono}</p>}
+          {arquero.direccion && <p><strong>Dirección:</strong> {arquero.direccion}</p>}
         </div>
 
         {/* DATOS DE ARQUERO */}
@@ -99,9 +122,6 @@ const PerfilArquero = () => {
         )}
       </div>
 
-      <p className="text-sm text-white/70 italic">
-        La edición del perfil estará disponible próximamente.
-      </p>
     </div>
   )
 }
