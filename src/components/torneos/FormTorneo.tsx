@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { crearTorneo, actualizarTorneo, type TorneoPayload } from '../../api/torneos'
-import type { Torneo } from '../../types/Torneo'
+import type { Torneo, EstadoTorneo } from '../../types/Torneo'
 
 interface Props {
   torneo?: Torneo
@@ -203,7 +203,7 @@ const FormTorneo = ({ torneo, onClose, onSuccess }: Props) => {
               <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
               <select
                 value={estado}
-                onChange={e => setEstado(e.target.value)}
+                onChange={e => setEstado(e.target.value as EstadoTorneo)}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               >
                 {ESTADOS.map(s => (
