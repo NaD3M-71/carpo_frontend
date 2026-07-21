@@ -99,3 +99,39 @@ export const getArqueroById = async (id: number): Promise<Arqueros> => {
   const data: Arqueros = await res.json()
   return data.arquero
 }
+
+export interface TorneoPayload {
+  nombre: string
+  modalidad: string
+  fechaInicio: string
+  fechaFin?: string
+  fechaLimiteInscripcion?: string
+  lugar: string
+  anio: number
+  descripcion?: string
+  esCopaCARPO?: boolean
+  estado?: string
+}
+
+export const crearTorneo = async (payload: TorneoPayload) => {
+  const { data } = await api.post(
+    `${import.meta.env.VITE_API_URL}/torneos/create`,
+    payload
+  )
+  return data
+}
+
+export const actualizarTorneo = async (id: number, payload: Partial<TorneoPayload>) => {
+  const { data } = await api.put(
+    `${import.meta.env.VITE_API_URL}/torneos/${id}`,
+    payload
+  )
+  return data
+}
+
+export const eliminarTorneo = async (id: number) => {
+  const { data } = await api.delete(
+    `${import.meta.env.VITE_API_URL}/torneos/${id}`
+  )
+  return data
+}

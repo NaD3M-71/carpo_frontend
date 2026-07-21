@@ -5,11 +5,13 @@ import { useAuth } from '../../context/AuthContext'
 interface Props {
   torneo: Torneo
   estado: 'ABIERTO' | 'CERRADO'
+  onEdit?: (torneo: Torneo) => void
 }
 
 
-const TorneoCard = ({ torneo, estado }: Props) => {
+const TorneoCard = ({ torneo, estado, onEdit }: Props) => {
   const { user } = useAuth()
+  const esAdmin = user?.rol === 'ADMIN' || user?.rol === 'SUPERADMIN'
 
   return (
     <div className="flex flex-col justify-between rounded-xl bg-white/10 p-4 text-white hover:bg-white/20 transition">
@@ -24,16 +26,28 @@ const TorneoCard = ({ torneo, estado }: Props) => {
         </p>
       </div>
 
-      <Link
-        to={`/torneos/${torneo.id}`}
-        className="mt-4 rounded-lg bg-red-600 px-4 py-2 text-center text-sm font-semibold hover:bg-red-700 transition"
-      >
-        {estado === 'ABIERTO'
-          ? user
-            ? 'Ver torneo'
-            : 'Ingresá para más info'
-          : 'Ver resultados'}
-      </Link>
+      <div className="mt-4 flex gap-2">
+        <Link
+          to={`/torneos/${torneo.id}`}
+          className="flex-1 rounded-lg bg-red-600 px-4 py-2 text-center text-sm font-semibold hover:bg-red-700 transition"
+        >
+          {estado === 'ABIERTO'
+            ? user
+              ? 'Ver torneo'
+              : 'Ingresá para más info'
+            : 'Ver resultados'}
+        </Link>
+
+        {esAdmin && onEdit && (
+          <button
+            type="button"
+            onClick={() => onEdit(torneo)}
+            className="rounded-lg bg-white/20 px-3 py-2 text-sm font-semibold hover:bg-white/30 transition"
+          >
+            Editar
+          </button>
+        )}
+      </div>
     </div>
   )
 }
