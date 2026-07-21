@@ -1,4 +1,5 @@
 import type { Participacion } from '../../types/Participaciones'
+import { getNombreCompletoParticipante } from '../../utils/participantes'
 
 interface Props {
   titulo: string
@@ -38,7 +39,12 @@ const ListaInscriptos = ({ titulo, inscriptos }: Props) => {
               </td>
 
               <td className="border px-2 py-1">
-                {p.arquero.apellido}, {p.arquero.nombre}
+                {getNombreCompletoParticipante(p)}
+                {p.esInvitado && (
+                  <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-xs font-semibold text-amber-700">
+                    Invitado
+                  </span>
+                )}
               </td>
 
               <td className="border px-2 py-1 text-center">
