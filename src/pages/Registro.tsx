@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
+import TrixEditor from '../components/TrixEditor'
 
 const REGISTRO_HABILITADO =
   import.meta.env.VITE_REGISTRO_HABILITADO === 'true'
@@ -45,6 +46,10 @@ const Registro = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleBioChange = (html: string) => {
+    setForm((prev) => ({ ...prev, bio: html }))
   }
 
   const handleSubmit = async (e: FormEvent) => {
@@ -132,11 +137,11 @@ const Registro = () => {
           {CATEGORIAS.map(c => <option key={c}>{c}</option>)}
         </select>
         <label htmlFor="bio" className='font-bold'>Sobre vos, este campo es opcional y puede cambiar cuando consigas mas logros o tengas algo nuevo para contar ;) </label>
-        <textarea
+        <TrixEditor
           name="bio"
-          placeholder="Bio"
-          onChange={handleChange}
-          className="w-full border px-3 py-2 rounded"
+          value={form.bio}
+          onChange={handleBioChange}
+          placeholder="Contanos sobre vos..."
         />
 
         <button
