@@ -26,7 +26,7 @@ const Footer = () => {
           className="h-16 md:h-28 w-auto opacity-90 hover:opacity-100 transition"
         />
       </a>
-      <a href="https://www.instagram.com/gscag/" target="_blank" rel="noopener noreferrer">
+      <a href="https://gscode.com.ar" target="_blank" rel="noopener noreferrer">
         <img
           src="/LOGO.png"
           alt="GS.code"
@@ -81,13 +81,13 @@ const Footer = () => {
 
           <div className="flex items-center gap-2">
             <span>Desarrollado por</span>
+            <a href={"https://gscode.com.ar"} target="_blank" rel="noopener noreferrer">
               <span>
                 <span className="font-bold">
                   GS
                 </span>
                 .code
               </span>
-            <a href={"https://gscode.com.ar"} target="_blank" rel="noopener noreferrer">
               <img
                 src="/LOGO.png"
                 alt="GS.code"
