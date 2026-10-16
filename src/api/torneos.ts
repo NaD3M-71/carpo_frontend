@@ -3,6 +3,7 @@ import type { Arquero, Participacion, ParticipacionesResponse } from '../types/P
 import type { Arqueros } from '../types/Arquero'
 import type { Torneo, TorneosResponse } from '../types/Torneo'
 import api from './axios'
+import { getArquerosPaginado } from './arqueros'
 
 
 export const getTorneos = async (): Promise<Torneo[]> => {
@@ -81,16 +82,19 @@ export const getCategoriasPorModalidad = async (modalidad: string) => {
   return data.categoriasEspecificas
 }
 
-export const getArqueros = async ()=>{
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/arqueros`)
+// Trae TODOS los arqueros activos recorriendo las paginas del listado.
+// El endpoint /arqueros esta paginado (25 por pagina), asi que hay que
+// pedir la primera para saber totalPages y luego el resto en paralelo.
+export const getArqueros = async (): Promise<Arquero[]> => {
+  const primera = await getArquerosPaginado(1)
 
-  if (!res.ok) {
-    throw new Error('Error al obtener arqueros')
-  }
+  const restantes = await Promise.all(
+    Array.from({ length: primera.totalPages - 1 }, (_, i) =>
+      getArquerosPaginado(i + 2)
+    )
+  )
 
-  const data: Arquero = await res.json()
-  return data.arqueros
-
+  return [primera, ...restantes].flatMap(p => p.arqueros) as Arquero[]
 }
 
 export const getArqueroById = async (id: number): Promise<Arqueros> => {
