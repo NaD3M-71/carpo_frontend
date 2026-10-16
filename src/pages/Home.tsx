@@ -52,7 +52,7 @@ const Home = () => {
           </p>
           <div>
             <a
-              href="https://docs.google.com/forms/..."
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe2OEq174i2xuH0sroxPtq8vfuLymwAOfR3XJWzzv8zMuE39g/viewform?usp=dialog"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block mt-6 bg-white text-red-600 px-6 py-3 rounded-lg hover:bg-blue-700 hover:text-white transition-colors"
