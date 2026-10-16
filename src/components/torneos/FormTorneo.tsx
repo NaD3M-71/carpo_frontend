@@ -16,6 +16,10 @@ const toInputDate = (isoString?: string | null) => {
   return isoString.slice(0, 10)
 }
 
+// Se guarda al mediodia UTC (09:00 en Argentina) para que la fecha no se corra
+// de dia al mostrarla en hora local. A medianoche UTC se veria el dia anterior.
+const toStoredDate = (fecha: string) => `${fecha}T12:00:00Z`
+
 const FormTorneo = ({ torneo, onClose, onSuccess }: Props) => {
   const esEdicion = !!torneo
 
@@ -48,11 +52,11 @@ const FormTorneo = ({ torneo, onClose, onSuccess }: Props) => {
     const payload: TorneoPayload = {
       nombre,
       modalidad,
-      fechaInicio,
+      fechaInicio: toStoredDate(fechaInicio),
       lugar,
       anio,
-      ...(fechaFin && { fechaFin }),
-      ...(fechaLimiteInscripcion && { fechaLimiteInscripcion }),
+      ...(fechaFin && { fechaFin: toStoredDate(fechaFin) }),
+      ...(fechaLimiteInscripcion && { fechaLimiteInscripcion: toStoredDate(fechaLimiteInscripcion) }),
       ...(descripcion && { descripcion }),
       esCopaCARPO,
       estado,
